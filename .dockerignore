@@ -1,9 +1,0 @@
-# Exclude
-*
-
-# Include
-!app
-!config.py
-!Pipfile
-!Pipfile.lock
-!setup.py
