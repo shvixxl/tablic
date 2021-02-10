@@ -5,10 +5,14 @@ name = "pypi"
 
 [packages]
 fastapi = {extras = ["all"], version = "*"}
+bcrypt = "*"
+pyjwt = "*"
+motor = "*"
 
 [dev-packages]
 pytest = "*"
 pylint = "*"
+faker = "*"
 
 [requires]
 python_version = "3.9"
