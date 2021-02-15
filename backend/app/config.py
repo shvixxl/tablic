@@ -12,3 +12,5 @@ MONGO_URI = 'mongodb://{username}:{password}@{host}:{port}/{db}'.format(
     username = os.environ.get('DB_USERNAME'),
     password = os.environ.get('DB_PASSWORD'),
 )
+
+MONGO_USER_COLLECTION = 'users'
