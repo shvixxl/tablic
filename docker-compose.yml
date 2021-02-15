@@ -1,0 +1,24 @@
+services:
+
+  db:
+    image: mongo:latest
+    restart: always
+    env_file: 
+      - .env
+    environment:
+      - MONGO_INITDB_DATABASE=$DB_NAME
+      - MONGO_INITDB_ROOT_USERNAME=$DB_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$DB_PASSWORD
+
+  backend:
+    build: 
+      context: ./backend
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    env_file:
+      - .env
+    volumes:
+      - ./backend:/usr/src/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
