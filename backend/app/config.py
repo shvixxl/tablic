@@ -3,9 +3,7 @@
 import os
 
 
-MONGO_URI = 'mongodb://{username}:{password}@{host}:{port}/{db}'.format(
-    db = os.environ.get('DB_NAME'),
-
+MONGO_URI = 'mongodb://{username}:{password}@{host}:{port}/'.format(
     host = os.environ.get('DB_HOST'),
     port = os.environ.get('DB_PORT'),
 

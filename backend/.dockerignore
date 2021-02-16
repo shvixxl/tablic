@@ -3,5 +3,5 @@
 
 # Include
 !app
-!Pipfile
-!Pipfile.lock
+!scripts
+!requirements.txt

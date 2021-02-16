@@ -3,16 +3,22 @@ services:
   db:
     image: mongo:latest
     restart: always
-    env_file: 
-      - .env
+    command: --quiet
+    logging:
+      driver: none
     environment:
-      - MONGO_INITDB_DATABASE=$DB_NAME
-      - MONGO_INITDB_ROOT_USERNAME=$DB_USERNAME
-      - MONGO_INITDB_ROOT_PASSWORD=$DB_PASSWORD
+      MONGO_INITDB_DATABASE: tablic
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    volumes:
+      - mongo-data:/data/db
+      - mongo-configdb:/data/configdb
 
   backend:
+    image: tablic-backend:latest
     build: 
       context: ./backend
+    restart: always
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     env_file:
       - .env
@@ -22,3 +28,8 @@ services:
       - 8000:8000
     depends_on:
       - db
+
+
+volumes:
+  mongo-data:
+  mongo-configdb:
