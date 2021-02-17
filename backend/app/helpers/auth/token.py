@@ -1,6 +1,6 @@
 """Token helpers."""
 
-from typing import Any
+from typing import Any, Optional
 from datetime import datetime, timedelta
 
 import jwt
@@ -24,7 +24,7 @@ async def verify_token(
     token: str,
     secret: str,
     algorithm: str = ALGORITHM,
-) -> str:
+) -> Optional[str]:
     """Verifies JWT token."""
     try:
         return jwt.decode(token, secret, algorithm).get('sub')
