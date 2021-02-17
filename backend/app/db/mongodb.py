@@ -2,10 +2,13 @@
 
 import logging
 
-from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
+from motor.motor_asyncio import (
+    AsyncIOMotorClient,
+    AsyncIOMotorDatabase,
+)
 
 
-class Database:
+class MongoDB:
     """Class for storing MongoDB connection"""
     client: AsyncIOMotorClient = None
     database: AsyncIOMotorDatabase = None
@@ -24,9 +27,9 @@ class Database:
         logging.info("Closed connection with MongoDB.")
 
 
-db = Database()
+db = MongoDB()
 
 
-async def get_db() -> AsyncIOMotorDatabase:
-    """Get main database."""
+async def get_db() -> MongoDB:
+    """Returns database instance."""
     return db.database
