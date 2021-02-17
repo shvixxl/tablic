@@ -39,7 +39,7 @@ class MongoModel(BaseModel):
         Mongo's `_id` field.
         """
         object_id = data.pop('_id', None)
-        super().__init__(**data, id=object_id)
+        super().__init__(**dict(data, id=object_id))
 
     def mongo(self, *args, **kwargs) -> dict:
         """Generates a dictionary for MongoDB."""
