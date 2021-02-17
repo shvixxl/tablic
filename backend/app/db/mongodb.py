@@ -28,8 +28,3 @@ class MongoDB:
 
 
 db = MongoDB()
-
-
-async def get_db() -> MongoDB:
-    """Returns database instance."""
-    return db.database

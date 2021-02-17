@@ -5,11 +5,12 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
-from ....db.mongodb import get_db
-from ....crud.auth import CRUDUser, get_users
+from ....crud.auth import CRUDUser
 from ....schemas.auth import UserIn, UserOut
 from ....services.auth import create_user, authenticate_user
 from ....exceptions import UserAlreadyExists
+
+from ...deps import get_users, get_db
 
 router = APIRouter(
     tags=['auth'],
