@@ -19,16 +19,17 @@ class CRUDBase:
     async def get(self, object_id: ObjectId) -> MongoModel:
         """Gets object by `id` from database."""
         obj = await self.collection.find_one({'_id': object_id})
-        return self.model(obj)
+        return self.model(**obj) if obj else None
 
     async def create(self, obj: MongoModel) -> MongoModel:
         """Creates new object in database."""
-        await self.collection.insert_one({'_id': obj.id})
+        await self.collection.insert_one(obj.mongo(exclude_unset=True))
         return obj
 
     async def update(self, obj: MongoModel) -> MongoModel:
         """Updates an existing object in database."""
         await self.collection.replace_one({'_id': obj.id}, obj.mongo())
+        return obj
 
     async def delete(self, obj: MongoModel) -> None:
         """Delete an existing object from database."""
