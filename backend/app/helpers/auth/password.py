@@ -1,4 +1,4 @@
-"""Helpers for authentication."""
+"""Password helpers."""
 
 import hashlib
 import hmac

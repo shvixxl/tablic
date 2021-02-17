@@ -4,7 +4,7 @@ from typing import Optional
 
 from fastapi.security import OAuth2PasswordRequestForm
 
-from ..helpers.auth import generate_password_hash, check_password_hash
+from ..helpers.auth.password import generate_password_hash, check_password_hash
 from ..schemas.auth import UserIn, UserDB
 from ..crud.auth import CRUDUser
 from ..exceptions import UserAlreadyExists
