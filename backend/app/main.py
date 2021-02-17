@@ -2,9 +2,9 @@
 
 from fastapi import FastAPI
 
-from app import config
-from app.db.mongodb import db
-from app.api.v1 import router
+from . import config
+from .api.v1 import router
+from .db.mongodb import db
 
 app = FastAPI()
 
