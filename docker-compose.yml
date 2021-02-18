@@ -3,7 +3,6 @@ services:
   db:
     image: mongo:latest
     restart: always
-    command: --quiet
     logging:
       driver: none
     environment:
