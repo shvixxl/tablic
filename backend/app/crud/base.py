@@ -1,6 +1,6 @@
 """Module with templates of CRUD."""
 
-from typing import TypeVar
+from typing import TypeVar, Union
 
 from motor.motor_asyncio import AsyncIOMotorCollection
 from bson.objectid import ObjectId
@@ -20,21 +20,27 @@ class CRUDBase:
         self.collection = collection
         self.model = model
 
-    async def get(self, object_id: ObjectId) -> Model:
+    async def get(self, object_id: Union[ObjectId, str]) -> Model:
         """Gets object by `id` from database."""
-        obj = await self.collection.find_one({'_id': object_id})
-        return self.model(**obj) if obj else None
+        obj = await self.collection.find_one({'_id': ObjectId(object_id)})
+        return self._serialize(obj)
 
     async def create(self, obj: Model) -> Model:
         """Creates new object in database."""
-        await self.collection.insert_one(obj.mongo(exclude_unset=True))
-        return obj
+        data = obj.mongo(exclude_unset=True)
+        result = await self.collection.insert_one(data)
+        return self.model(**dict(obj.dict(), id=result.inserted_id))
 
     async def update(self, obj: Model) -> Model:
         """Updates an existing object in database."""
-        await self.collection.replace_one({'_id': obj.id}, obj.mongo())
+        data = obj.mongo()
+        await self.collection.replace_one({'_id': obj.id}, data)
         return obj
 
-    async def delete(self, obj: Model) -> None:
-        """Delete an existing object from database."""
-        await self.collection.delete_one({'_id': obj.id})
+    async def delete(self, object_id: Union[ObjectId, str]) -> None:
+        """Deletes an existing object from database."""
+        await self.collection.delete_one({'_id': ObjectId(object_id)})
+
+    def _serialize(self, obj: dict) -> Model:
+        """Serializes object with `self.model` or returns `None`."""
+        return self.model(**obj) if obj else None

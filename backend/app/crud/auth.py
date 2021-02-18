@@ -16,4 +16,4 @@ class CRUDUser(CRUDBase):
     async def get_by_email(self, email: EmailStr) -> Model:
         """Retrieves User from database by Email."""
         user = await self.collection.find_one({'email': email})
-        return self.model(**user) if user else None
+        return self._serialize(user)
