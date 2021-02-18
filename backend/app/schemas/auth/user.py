@@ -10,7 +10,7 @@ from ..base import MongoModel
 
 class User(MongoModel):
     """Base User scheme."""
-    email: Optional[EmailStr] = None
+    email: Optional[EmailStr] = None  # pylint: disable=E1136  # pylint/issues/3882
 
 
 class UserIn(BaseModel):

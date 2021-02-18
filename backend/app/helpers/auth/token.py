@@ -2,7 +2,7 @@
 
 from datetime import datetime, timedelta
 
-import jwt
+import jwt  # pylint: disable=E0401  # vscode
 
 ALGORITHM = 'HS256'
 

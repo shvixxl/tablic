@@ -1,4 +1,2 @@
 [MASTER]
 extension-pkg-whitelist=pydantic
-
-disable=E1136,E0401

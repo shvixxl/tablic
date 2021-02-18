@@ -34,7 +34,7 @@ async def create_user(
 async def authenticate_user(
     credentials: OAuth2PasswordRequestForm,
     users: CRUDUser
-) -> Optional[UserDB]:
+) -> Optional[UserDB]:  # pylint: disable=E1136  # pylint/issues/3882
     """Service for authenticating User."""
     user = await users.get_by_email(credentials.username)
 

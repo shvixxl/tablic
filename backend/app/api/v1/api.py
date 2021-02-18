@@ -1,3 +1,5 @@
+"""API v1 routes."""
+
 from fastapi import APIRouter
 
 from .endpoints import auth

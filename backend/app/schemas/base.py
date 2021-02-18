@@ -3,7 +3,7 @@
 from typing import Any, Optional
 
 from pydantic import BaseModel, BaseConfig
-from bson.objectid import ObjectId, InvalidId
+from bson.objectid import ObjectId, InvalidId  # pylint: disable=E0401  # vscode
 
 
 class MongoId(str):
@@ -24,7 +24,7 @@ class MongoId(str):
 class MongoModel(BaseModel):
     """Pydantic BaseModel but with helpers for using with MongoDB."""
 
-    id: Optional[MongoId] = None
+    id: Optional[MongoId] = None  # pylint: disable=E1136  # pylint/issues/3882
 
     class Config(BaseConfig):
         """Config for MongoModel."""
@@ -46,6 +46,7 @@ class MongoModel(BaseModel):
     def mongo(self, *args, **kwargs) -> dict:
         """Generates a dictionary for MongoDB."""
         parsed = self.dict(*args, **kwargs)
-        if '_id' not in parsed and 'id' in parsed:
-            parsed['_id'] = parsed.pop('id')
+        parsed_id = parsed.pop('id', None)
+        if parsed_id:
+            parsed.setdefault('_id', parsed_id)
         return parsed
