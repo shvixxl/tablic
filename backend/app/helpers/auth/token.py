@@ -1,6 +1,5 @@
 """Token helpers."""
 
-from typing import Any, Optional
 from datetime import datetime, timedelta
 
 import jwt
@@ -8,25 +7,25 @@ import jwt
 ALGORITHM = 'HS256'
 
 
-async def generate_token(
-    subject: Any,
+def generate_token(
+    data: dict,
     expires: timedelta,
     secret: str,
     algorithm: str = ALGORITHM,
 ) -> str:
     """Generates JWT token."""
     exp = datetime.utcnow() + expires
-    payload = {'exp': exp, 'sub': str(subject)}
+    payload = dict(data, exp=exp)
     return jwt.encode(payload, secret, algorithm)
 
 
-async def verify_token(
+def verify_token(
     token: str,
     secret: str,
     algorithm: str = ALGORITHM,
-) -> Optional[str]:
+) -> dict:
     """Verifies JWT token."""
     try:
-        return jwt.decode(token, secret, algorithm).get('sub')
+        return jwt.decode(token, secret, algorithm)
     except jwt.PyJWTError:
         return None

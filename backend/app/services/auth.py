@@ -4,10 +4,15 @@ from typing import Optional
 
 from fastapi.security import OAuth2PasswordRequestForm
 
-from ..helpers.auth import generate_password_hash, check_password_hash
-from ..schemas.auth import UserIn, UserDB
+from ..config import ACCESS_TOKEN_EXPIRE_DAYS, SECRET_KEY
 from ..crud.auth import CRUDUser
 from ..exceptions import UserAlreadyExists
+from ..schemas.auth import UserIn, UserDB
+from ..helpers.auth import (
+    generate_password_hash,
+    check_password_hash,
+    generate_token,
+)
 
 
 async def create_user(
@@ -42,3 +47,15 @@ async def authenticate_user(
         return None
 
     return user
+
+
+async def generate_access_token(
+    user: UserDB,
+) -> dict:
+    """Service for generating access token."""
+    data = {"sub": str(user.id)}
+    token = generate_token(data, ACCESS_TOKEN_EXPIRE_DAYS, SECRET_KEY)
+    return {
+        'access_token': token,
+        'token_type': 'bearer',
+    }

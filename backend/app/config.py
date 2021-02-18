@@ -1,6 +1,7 @@
 """App configuration"""
 
 import os
+from datetime import timedelta
 
 
 MONGO_URI = 'mongodb://{username}:{password}@{host}:{port}/'.format(
@@ -12,3 +13,7 @@ MONGO_URI = 'mongodb://{username}:{password}@{host}:{port}/'.format(
 )
 
 MONGO_USER_COLLECTION = 'users'
+
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
+ACCESS_TOKEN_EXPIRE_DAYS = timedelta(int(os.environ.get('ACCESS_TOKEN_EXPIRE_DAYS')))

@@ -1,16 +1,18 @@
 """Routes for auth module."""
 
-from motor.motor_asyncio import AsyncIOMotorDatabase
-
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
 from ....crud.auth import CRUDUser
-from ....schemas.auth import UserIn, UserOut
-from ....services.auth import create_user, authenticate_user
 from ....exceptions import UserAlreadyExists
+from ....schemas.auth import UserIn, UserOut, Token
+from ....services.auth import (
+    create_user,
+    authenticate_user,
+    generate_access_token,
+)
 
-from ...deps import get_users, get_db
+from ...deps import get_users
 
 router = APIRouter(
     tags=['auth'],
@@ -40,20 +42,20 @@ async def register(
 
 @router.post(
     '/login',
-    response_model=UserOut,
+    response_model=Token,
     status_code=status.HTTP_200_OK,
 )
 async def login(
     credentials: OAuth2PasswordRequestForm = Depends(),
     users: CRUDUser = Depends(get_users)
-) -> UserOut:
+) -> Token:
     """User authentication."""
     user = await authenticate_user(credentials, users)
 
     if not user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Incorrect email or password."
+            detail="Incorrect email or password.",
         )
 
-    return user
+    return await generate_access_token(user)
