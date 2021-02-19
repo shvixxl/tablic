@@ -6,9 +6,9 @@ services:
     logging:
       driver: none
     environment:
-      MONGO_INITDB_DATABASE: tablic
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: ${DB_NAME}
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
     volumes:
       - mongo-data:/data/db
       - mongo-configdb:/data/configdb
@@ -22,7 +22,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./backend:/usr/src/app
+      - ./backend:/app
     ports:
       - 8000:8000
     depends_on:

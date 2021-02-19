@@ -23,6 +23,17 @@
 
 ### Configuration
 
+Create a copy of `.env.example` file and rename it to `.env`:
+
+```bash
+cp .env.example .env
+```
+
+Open `.env` file and set these enviroment variables:
+
+* `DB_PASSWORD` - mongodb password.
+* `SECRET_KEY` - backend server secret key.
+
 ### Development
 
 Start the stack with `docker-compose`:
