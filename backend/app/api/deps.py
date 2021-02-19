@@ -3,7 +3,7 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 
-from ..config import MONGO_USER_COLLECTION, SECRET_KEY
+from ..config import USER_COLLECTION_NAME, SECRET_KEY
 from ..crud.auth import CRUDUser
 from ..db.mongodb import MongoDB, db
 from ..schemas.auth import UserDB
@@ -20,7 +20,7 @@ async def get_db() -> MongoDB:
 
 async def get_users(database: MongoDB = Depends(get_db)) -> CRUDUser:
     """Return users instance."""
-    return CRUDUser(database[MONGO_USER_COLLECTION], UserDB)
+    return CRUDUser(database[USER_COLLECTION_NAME], UserDB)
 
 
 async def get_current_user(

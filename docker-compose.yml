@@ -3,8 +3,6 @@ services:
   db:
     image: mongo:latest
     restart: always
-    logging:
-      driver: none
     environment:
       MONGO_INITDB_DATABASE: ${DB_NAME}
       MONGO_INITDB_ROOT_USERNAME: ${DB_USERNAME}

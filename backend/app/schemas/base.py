@@ -3,7 +3,7 @@
 from typing import Any, Optional
 
 from pydantic import BaseModel, BaseConfig
-from bson.objectid import ObjectId, InvalidId  # pylint: disable=E0401  # vscode
+from bson.objectid import ObjectId, InvalidId
 
 
 class MongoId(str):
