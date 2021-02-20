@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y netcat
 RUN pip install --upgrade pip
 RUN pip install pipenv
 
-COPY ./requirements.txt .
+COPY Pipfile* ./
+RUN pipenv lock --keep-outdated --requirements > requirements.txt
 RUN pip install --no-cache-dir -r ./requirements.txt
 
 COPY . .
