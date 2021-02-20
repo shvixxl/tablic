@@ -39,7 +39,7 @@ Open `.env` file and set these enviroment variables:
 
 ##### Logging
 
-For reference use the [Loguru documentation].(https://loguru.readthedocs.io/en/stable/api.html#)
+For reference use the [Loguru documentation](https://loguru.readthedocs.io/en/stable/api.html#).
 
 * [`LOGGING_LEVEL`](https://docs.python.org/3/library/logging.html#logging-levels) - The minimum severity level from which logged messages should be sent to the sink. *Default* is `20` or `INFO`.
 * `LOGGING_FORMAT` - The template used to format logged messages.
