@@ -3,8 +3,9 @@
 # pylint: disable=unsubscriptable-object  # pylint/issues/3882
 # pylint: disable=no-self-argument,no-self-use  # pydantic validators
 
+from typing import Optional, List, Union
+from pathlib import Path
 from datetime import timedelta
-from typing import Optional, List
 
 from pydantic import (
     BaseSettings,
@@ -48,6 +49,25 @@ class Settings(BaseSettings):
         )
 
     USER_COLLECTION_NAME: Optional[str] = 'users'
+
+    LOGGING_FILENAME: Optional[str] = 'log.json'
+    LOGGING_PATH: Path
+
+    @validator('LOGGING_PATH', pre=True)
+    def assemble_logging_path(cls, value: Path, values: dict) -> Path:
+        """"Adds filename to the path."""
+        return Path(value) / values.get('LOGGING_FILENAME')
+
+    LOGGING_FORMAT: Optional[str] = (
+        '<level>{level: >8}</level> | '
+        '<dim>{time:YYYY-MM-DD HH:mm:ss}</dim> | '
+        '<normal>{message}</normal>'
+    )
+
+    LOGGING_LEVEL: Optional[Union[int, str]] = 20
+    LOGGING_ROTATION: Optional[str] = '1 day'
+    LOGGING_RETENTION: Optional[str] = '1 month'
+    LOGGING_COMPRESSION: Optional[str] = 'tar.gz'
 
     class Config(BaseConfig):
         """Settings config class."""

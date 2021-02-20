@@ -4,8 +4,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .config import settings
+from .logging import init_logger
 from .api.v1 import router
 from .db.mongodb import db
+
+logger = init_logger()
 
 app = FastAPI(
     title='Tablic',
