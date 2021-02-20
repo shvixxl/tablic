@@ -7,6 +7,7 @@
   - [Frontend](#frontend)
 - [Using this Project](#using-this-project)
   - [Configuration](#configuration)
+    - [Additional Configuration](#additional-configuration)
   - [Development](#development)
 - [License](#license)
 
@@ -34,6 +35,18 @@ Open `.env` file and set these enviroment variables:
 * `DB_PASSWORD` - mongodb password.
 * `SECRET_KEY` - backend server secret key.
 
+#### Additional Configuration
+
+##### Logging
+
+For reference use the [Loguru documentation].(https://loguru.readthedocs.io/en/stable/api.html#)
+
+* [`LOGGING_LEVEL`](https://docs.python.org/3/library/logging.html#logging-levels) - The minimum severity level from which logged messages should be sent to the sink. *Default* is `20` or `INFO`.
+* `LOGGING_FORMAT` - The template used to format logged messages.
+* [`LOGGING_ROTATION`](https://loguru.readthedocs.io/en/stable/api/logger.html#file) - A condition indicating whenever the current logged file should be closed and a new one started. *Default* is `1 day`.
+* [`LOGGING_RETENTION`](https://loguru.readthedocs.io/en/stable/api/logger.html#file) - A directive filtering old files that should be removed during rotation or end of program. *Default* is `1 month`.
+* [`LOGGING_COMPRESSION`](https://loguru.readthedocs.io/en/stable/api/logger.html#file) - A compression or archive format to which log files should be converted at closure. *Default* is `tar.gz`.
+
 ### Development
 
 Start the stack with `docker-compose`:
@@ -41,14 +54,6 @@ Start the stack with `docker-compose`:
 ```bash
 docker-compose up -d
 ```
-
-**Available urls**:
-
-* *API*: http://localhost:8000/api/
-
-* *Interactive documentation* (Swagger UI): http://localhost:8000/docs
-
-* *Alternative documentation* (ReDoc): http://localhost:8000/redoc
 
 To check the logs, run:
 
@@ -62,5 +67,20 @@ To check the logs of a specific service, add the name of the service, e.g.:
 docker-compose logs backend
 ```
 
+To bring the stack down, run:
+
+```bash
+docker-compose down
+```
+
+#### Routes
+
+* *API*: http://localhost:8000/api/
+
+* *Interactive documentation* (Swagger UI): http://localhost:8000/docs
+
+* *Alternative documentation* (ReDoc): http://localhost:8000/redoc
+
 ## License
-[MIT](https://github.com/ShviXXL/tablic/blob/main/LICENSE)
+
+[MIT](LICENSE)
