@@ -4,7 +4,7 @@ from typing import Optional
 
 from fastapi.security import OAuth2PasswordRequestForm
 
-from ..config import ACCESS_TOKEN_EXPIRE_DAYS, SECRET_KEY
+from ..config import settings
 from ..crud.auth import CRUDUser
 from ..exceptions import UserAlreadyExists
 from ..schemas.auth import UserIn, UserDB
@@ -34,7 +34,7 @@ async def create_user(
 async def authenticate_user(
     credentials: OAuth2PasswordRequestForm,
     users: CRUDUser
-) -> Optional[UserDB]:  # pylint: disable=E1136  # pylint/issues/3882
+) -> Optional[UserDB]:
     """Service for authenticating User."""
     user = await users.get_by_email(credentials.username)
 
@@ -54,7 +54,11 @@ async def generate_access_token(
 ) -> dict:
     """Service for generating access token."""
     data = {"sub": str(user.id)}
-    token = generate_token(data, ACCESS_TOKEN_EXPIRE_DAYS, SECRET_KEY)
+    token = generate_token(
+        data,
+        settings.ACCESS_TOKEN_EXPIRE_DAYS,
+        settings.SECRET_KEY
+    )
     return {
         'access_token': token,
         'token_type': 'bearer',

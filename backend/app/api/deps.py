@@ -3,7 +3,7 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 
-from ..config import USER_COLLECTION_NAME, SECRET_KEY
+from ..config import settings
 from ..crud.auth import CRUDUser
 from ..db.mongodb import MongoDB, db
 from ..schemas.auth import UserDB
@@ -20,7 +20,7 @@ async def get_db() -> MongoDB:
 
 async def get_users(database: MongoDB = Depends(get_db)) -> CRUDUser:
     """Return users instance."""
-    return CRUDUser(database[USER_COLLECTION_NAME], UserDB)
+    return CRUDUser(database[settings.USER_COLLECTION_NAME], UserDB)
 
 
 async def get_current_user(
@@ -28,7 +28,7 @@ async def get_current_user(
     users: CRUDUser = Depends(get_users)
 ) -> UserDB:
     """Validates token and returns user."""
-    payload = verify_token(token, SECRET_KEY)
+    payload = verify_token(token, settings.SECRET_KEY)
     if not payload:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
