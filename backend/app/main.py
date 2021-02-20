@@ -9,7 +9,9 @@ from .db.mongodb import db
 
 app = FastAPI(
     title='Tablic',
-    openapi_url='/api/v1/openapi.json'
+    openapi_url='/api/v1/openapi.json',
+    docs_url="/api/v1/docs",
+    redoc_url="/api/v1/redoc",
 )
 
 

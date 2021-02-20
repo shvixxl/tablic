@@ -1,5 +1,7 @@
 """Module with base classes for schemas."""
 
+# pylint: disable=E1136  # pylint/issues/3882
+
 from typing import Any, Optional
 
 from pydantic import BaseModel, BaseConfig
@@ -24,7 +26,7 @@ class MongoId(str):
 class MongoModel(BaseModel):
     """Pydantic BaseModel but with helpers for using with MongoDB."""
 
-    id: Optional[MongoId] = None  # pylint: disable=E1136  # pylint/issues/3882
+    id: Optional[MongoId] = None
 
     class Config(BaseConfig):
         """Config for MongoModel."""

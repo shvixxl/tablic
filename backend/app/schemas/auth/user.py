@@ -1,5 +1,7 @@
 """User schemas."""
 
+# pylint: disable=E1136  # pylint/issues/3882
+
 from typing import Optional
 
 from pydantic import BaseModel

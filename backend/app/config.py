@@ -1,4 +1,7 @@
-"""App configuration"""
+"""Application configuration module."""
+
+# pylint: disable=unsubscriptable-object  # pylint/issues/3882
+# pylint: disable=no-self-argument,no-self-use  # pydantic validators
 
 from datetime import timedelta
 from typing import Optional, List
