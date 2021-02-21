@@ -13,6 +13,12 @@ def secret(faker):
 
 
 @pytest.fixture
+def email(faker):
+    """Random email address."""
+    return faker.email()
+
+
+@pytest.fixture
 def password(faker):
     """Random password."""
     return faker.password(16)
