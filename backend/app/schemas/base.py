@@ -1,4 +1,4 @@
-"""Module with base classes for schemas."""
+"""Module with base schema classes."""
 
 # pylint: disable=E1136  # pylint/issues/3882
 
@@ -40,9 +40,8 @@ class MongoModel(BaseModel):
         Extended Pydantic's `BaseModel.__init__` with parsing for
         Mongo's `_id` field.
         """
-        object_id = data.pop('_id', None)
-        if object_id:
-            data.update(id=object_id)
+        if '_id' in data:
+            data.setdefault('id', data.pop('_id'))
         super().__init__(**data)
 
     def mongo(self, *args, **kwargs) -> dict:
