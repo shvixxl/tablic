@@ -9,9 +9,8 @@ jobs:
       matrix:
         python-version: [3.9]
     steps:
-    - uses: actions/checkout@master
     - name: Set up Python
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v2.2.1
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install pipenv
@@ -21,7 +20,9 @@ jobs:
         cd backend
         pipenv install --dev
     - name: Run tests
-      run: pytest --cov=app
+      run: |
+        pipenv shell
+        pytest --cov=app
     - name: Upload coverage
-      uses: codecov/codecov-action@v1
+      uses: codecov/codecov-action@v1.2.1
       
