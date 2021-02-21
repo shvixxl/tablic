@@ -7,24 +7,25 @@ from typing import Optional
 from pydantic import BaseModel
 from pydantic import EmailStr
 
-from ..base import MongoModel
+from ..base import MongoId, MongoModel
 
 
-class User(MongoModel):
+class User(BaseModel):
     """Base User scheme."""
-    email: Optional[EmailStr] = None
-
-
-class UserIn(BaseModel):
-    """Input User scheme."""
     email: EmailStr
+
+
+class UserIn(User):
+    """Input User scheme."""
     password: str
 
 
 class UserOut(User):
     """Output User scheme."""
+    id: Optional[MongoId] = None
 
 
-class UserDB(User):
+class UserDB(MongoModel):
     """Database User scheme."""
+    email: EmailStr
     password_hash: str
