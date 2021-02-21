@@ -9,13 +9,15 @@ ALGORITHM = 'HS256'
 
 def generate_token(
     data: dict,
-    expires: timedelta,
     secret: str,
+    expires: timedelta = None,
     algorithm: str = ALGORITHM,
 ) -> str:
     """Generates JWT token."""
-    exp = datetime.utcnow() + expires
-    payload = dict(data, exp=exp)
+    payload = dict(data)
+    if expires:
+        exp = datetime.utcnow() + expires
+        payload.setdefault('exp', exp)
     return jwt.encode(payload, secret, algorithm)
 
 

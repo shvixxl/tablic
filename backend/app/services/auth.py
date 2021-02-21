@@ -58,8 +58,8 @@ async def generate_access_token(
     data = {"sub": str(user.id)}
     token = generate_token(
         data,
+        settings.SECRET_KEY,
         settings.ACCESS_TOKEN_EXPIRE_DAYS,
-        settings.SECRET_KEY
     )
     return {
         'access_token': token,
