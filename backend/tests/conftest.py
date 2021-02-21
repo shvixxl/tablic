@@ -3,6 +3,7 @@
 # pylint: disable=redefined-outer-name
 
 import pytest
+from bson.objectid import ObjectId
 
 
 @pytest.fixture
@@ -24,6 +25,6 @@ def time_delta(faker):
 
 
 @pytest.fixture
-def uuid(faker):
+def object_id():
     """Random uuid."""
-    return faker.uuid4()
+    return ObjectId()
