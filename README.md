@@ -1,5 +1,17 @@
 # Tablic
 
+<p>
+  <a href="https://github.com/ShviXXL/tablic/actions/workflows/testing.yml">
+    <img src="https://github.com/ShviXXL/tablic/actions/workflows/testing.yml/badge.svg" alt="Testing">
+  </a>
+  <a href="https://github.com/ShviXXL/tablic/actions/workflows/linting.yml">
+    <img src="https://github.com/ShviXXL/tablic/actions/workflows/linting.yml/badge.svg" alt="Linting">
+  </a>
+  <a href="https://codecov.io/gh/ShviXXL/tablic">
+    <img src="https://codecov.io/gh/ShviXXL/tablic/branch/main/graph/badge.svg"/>
+  </a>
+</p>
+
  Web Application.
 
 - [Requirements](#requirements)
