@@ -1,28 +1,32 @@
 name: Tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
   test:
-    name: Run tests
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.9]
+    env:
+      working-directory: ./backend
     steps:
+    - uses: actions/checkout@v2
     - name: Set up Python
-      uses: actions/setup-python@v2.2.1
+      uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install pipenv
-      run: pip install pipenv
+        python-version: 3.9
     - name: Install dependencies
       run: |
-        cd backend
-        pipenv install --dev
+        python -m pip install --upgrade pip
+        pip install pipenv pytest
+        pipenv lock --requirements > requirements.txt
+        pip install -r ./requirements.txt
+      working-directory: ${{ env.working-directory }}
     - name: Run tests
       run: |
-        pipenv shell
         pytest --cov=app
+      working-directory: ${{ env.working-directory }}
     - name: Upload coverage
-      uses: codecov/codecov-action@v1.2.1
-      
+      uses: codecov/codecov-action@v1
