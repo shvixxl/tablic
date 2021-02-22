@@ -25,7 +25,7 @@ jobs:
       working-directory: ${{ env.working-directory }}
     - name: Run tests
       run: |
-        pytest --cov=app --cov=tests
+        pytest --cov=app --cov=tests --cov-report=xml
       working-directory: ${{ env.working-directory }}
     - name: Upload coverage
       uses: codecov/codecov-action@v1
