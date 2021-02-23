@@ -13,17 +13,27 @@ jobs:
       working-directory: ./backend
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: 3.9
+
+    - name: Install pipenv
+      run: pip install pipenv
+
+    - name: Cache pipenv
+      id: cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.local/share/virtualenvs
+        key: ${{ runner.os }}-pipenv-${{ hashFiles('Pipfile.lock') }}
+
     - name: Install dependencies
-      run: |
-        pip install --upgrade pipenv
-        pipenv lock --dev --requirements > requirements.txt
-        pip install -r ./requirements.txt
+      if: steps.cache.outputs.cache-hit != 'true'
       working-directory: ${{ env.working-directory }}
+      run: pipenv install --dev
+
     - name: Run linters
-      run: |
-        pylint app
       working-directory: ${{ env.working-directory }}
+      run: pipenv run pylint app --fail-under 9.5
