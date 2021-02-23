@@ -12,9 +12,9 @@ logger = init_logger()
 
 app = FastAPI(
     title='Tablic',
-    openapi_url='/api/v1/openapi.json',
-    docs_url="/api/v1/docs",
-    redoc_url="/api/v1/redoc",
+    openapi_url='/api',
+    docs_url="/api/docs",
+    redoc_url="/api/redoc",
 )
 
 

@@ -85,13 +85,13 @@ To bring the stack down, run:
 docker-compose down
 ```
 
-#### Routes
+#### Endpoints
 
 * *API*: http://localhost:8000/api/
 
-* *Interactive documentation* (Swagger UI): http://localhost:8000/docs
+* *Interactive documentation* (Swagger UI): http://localhost:8000/api/docs
 
-* *Alternative documentation* (ReDoc): http://localhost:8000/redoc
+* *Alternative documentation* (ReDoc): http://localhost:8000/api/redoc
 
 ## License
 
