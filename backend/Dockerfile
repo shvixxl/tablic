@@ -1,5 +1,3 @@
-# Build
-
 FROM python:3
 
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -10,12 +8,12 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y netcat
 
-RUN pip install --upgrade pip
-RUN pip install pipenv
+RUN pip install --upgrade pip && pip install pipenv
 
 COPY Pipfile* ./
-RUN pipenv lock --keep-outdated --requirements > requirements.txt
-RUN pip install --no-cache-dir -r ./requirements.txt
+RUN pipenv install --system --deploy --ignore-pipfile
+
+RUN pip uninstall pipenv -y && apt-get autoremove -y
 
 COPY . .
 
