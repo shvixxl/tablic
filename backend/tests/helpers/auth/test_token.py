@@ -22,7 +22,6 @@ def test_generate_token(object_id, secret, time_delta):
 
 def test_verify_token(object_id, secret, time_delta):
     """Test `verify_token` function."""
-
     token = _generate_token(object_id, secret, time_delta)
     payload = verify_token(token, secret)
 
@@ -34,7 +33,6 @@ def test_verify_token(object_id, secret, time_delta):
 
 def test_wrong_secret(faker, object_id, secret, time_delta):
     """Test `verify_token` with wrong secret."""
-
     wrong_secret = faker.password(32)
 
     token = _generate_token(object_id, secret, time_delta)
@@ -45,7 +43,6 @@ def test_wrong_secret(faker, object_id, secret, time_delta):
 
 def test_expired_token(faker, object_id, secret):
     """Test expired token."""
-
     time_delta = faker.time_delta(0) - timedelta(1)
 
     token = _generate_token(object_id, secret, time_delta)
@@ -56,7 +53,6 @@ def test_expired_token(faker, object_id, secret):
 
 def test_token_headers(object_id, secret, time_delta):
     """Test token headers."""
-
     token = _generate_token(object_id, secret, time_delta)
     headers = jwt.get_unverified_header(token)
 
