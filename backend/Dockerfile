@@ -13,6 +13,11 @@ RUN pip install --upgrade pip && pip install pipenv
 COPY Pipfile* ./
 RUN pipenv install --system --deploy --ignore-pipfile
 
+ARG INSTALL_DEV=false
+RUN bash -c "if [[ $INSTALL_DEV == 'true' ]] ; then \
+                pipenv install --system --dev --ignore-pipfile ; else \
+                pipenv install --system --deploy --ignore-pipfile ; fi"
+
 RUN pip uninstall pipenv -y && apt-get autoremove -y
 
 COPY . .

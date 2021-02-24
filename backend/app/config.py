@@ -30,7 +30,8 @@ class Settings(BaseSettings):
         return value
 
     DB_HOST: str
-    DB_PORT: str
+    DB_PORT: int
+    DB_NAME: str
     DB_USERNAME: str
     DB_PASSWORD: str
 
@@ -41,11 +42,12 @@ class Settings(BaseSettings):
         """Assebles database URI."""
         if isinstance(value, str):
             return value
-        return 'mongodb://{username}:{password}@{host}:{port}'.format(
+        return 'mongodb://{username}:{password}@{host}:{port}/{name}'.format(
             username=values.get('DB_USERNAME'),
             password=values.get('DB_PASSWORD'),
             host=values.get('DB_HOST'),
             port=values.get('DB_PORT'),
+            name=values.get('DB_NAME'),
         )
 
     USER_COLLECTION_NAME: Optional[str] = 'users'

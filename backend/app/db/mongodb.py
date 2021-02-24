@@ -17,7 +17,7 @@ class MongoDB:
         """Establish MongoDB connection."""
         logging.info("Connecting to MongoDB.")
         self.client = AsyncIOMotorClient(uri)
-        self.database = self.client.main_db
+        self.database = self.client.get_default_database()
         logging.info('Connected to MongoDB.')
 
     async def close_database_connection(self):
