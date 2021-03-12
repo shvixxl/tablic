@@ -2,12 +2,24 @@
 
 # pylint: disable=redefined-outer-name
 
+from typing import Generator
+
 import pytest
 from bson.objectid import ObjectId
+from httpx import AsyncClient
+
+from app.main import app
 
 
 @pytest.fixture
-def secret(faker):
+async def client() -> Generator:
+    """`AsyncClient` instance."""
+    async with AsyncClient(app=app) as client:
+        yield client
+
+
+@pytest.fixture
+def secret(faker) -> str:
     """Random secret key."""
     return faker.password(32)
 

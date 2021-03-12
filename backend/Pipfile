@@ -16,6 +16,7 @@ pylint = "*"
 faker = "*"
 pytest-cov = "*"
 pytest-asyncio = "*"
+httpx = "*"
 
 [requires]
 python_version = "3.9"
