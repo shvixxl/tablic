@@ -87,7 +87,9 @@ docker-compose down
 
 #### Endpoints
 
-* *API*: http://localhost:8000/api/
+* *Client*: http://localhost
+
+* *API*: http://localhost:8000/api
 
 * *Interactive documentation* (Swagger UI): http://localhost:8000/api/docs
 

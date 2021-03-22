@@ -28,6 +28,13 @@ services:
     depends_on:
       - db
 
+  frontend:
+    image: tablic-frontend:latest
+    build:
+      context: ./frontend
+    ports:
+      - 80:80
+
 
 volumes:
   mongo-data:

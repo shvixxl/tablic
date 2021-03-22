@@ -1,1 +1,10 @@
-node_modules
+# Exclude
+*
+
+# Include
+!public
+!src
+!babel.config.js
+!package*.json
+!vue.config.js
+!yarn.lock
