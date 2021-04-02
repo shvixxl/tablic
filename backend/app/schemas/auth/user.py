@@ -11,21 +11,19 @@ from ..base import MongoId, MongoModel
 
 
 class User(BaseModel):
-    """Base User scheme."""
+    """Base User schema."""
     email: EmailStr
 
 
 class UserIn(User):
-    """Input User scheme."""
+    """Input User schema."""
     password: str
 
 
-class UserOut(User):
-    """Output User scheme."""
+    """Output User schema."""
     id: Optional[MongoId] = None
 
 
-class UserDB(MongoModel):
-    """Database User scheme."""
+    """Database User schema."""
     email: EmailStr
     password_hash: str
