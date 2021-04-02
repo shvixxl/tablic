@@ -7,7 +7,7 @@ from typing import Optional
 from fastapi.security import OAuth2PasswordRequestForm
 
 from ..config import settings
-from ..crud.auth import CRUDUser
+from ..crud import CRUDUser
 from ..exceptions import UserAlreadyExists
 from ..schemas.auth import UserIn, UserDB
 from ..helpers.auth import (

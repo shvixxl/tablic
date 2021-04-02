@@ -4,7 +4,7 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 
 from ..config import settings
-from ..crud.auth import CRUDUser
+from ..crud import CRUDUser
 from ..db.mongodb import MongoDB, db
 from ..schemas.auth import UserDB
 from ..helpers.auth import verify_token

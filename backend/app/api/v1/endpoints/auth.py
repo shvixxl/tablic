@@ -3,7 +3,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
-from ....crud.auth import CRUDUser
+from ....crud import CRUDUser
 from ....exceptions import UserAlreadyExists
 from ....schemas.auth import UserIn, UserOut, Token
 from ....services.auth import (
