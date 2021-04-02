@@ -1,7 +1,5 @@
 """Module with base schema classes."""
 
-# pylint: disable=E1136  # pylint/issues/3882
-
 from typing import Any, Optional
 
 from pydantic import BaseModel, BaseConfig

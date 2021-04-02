@@ -1,7 +1,5 @@
 """Auth services with bussines logic."""
 
-# pylint: disable=E1136  # pylint/issues/3882
-
 from typing import Optional
 
 from fastapi.security import OAuth2PasswordRequestForm
