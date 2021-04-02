@@ -18,7 +18,7 @@ class MongoId(str):
         try:
             return ObjectId(str(value))
         except InvalidId as error:
-            raise ValueError('Not a valid ObjectId') from error
+            raise ValueError('not a valid ObjectId') from error
 
 
 class MongoModel(BaseModel):

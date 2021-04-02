@@ -1,6 +1,6 @@
 """Module with templates of CRUD."""
 
-from typing import TypeVar, Union
+from typing import TypeVar, Union, Optional
 
 from motor.motor_asyncio import AsyncIOMotorCollection
 from bson.objectid import ObjectId
@@ -20,8 +20,8 @@ class CRUDBase:
         self.collection = collection
         self.model = model
 
-    async def get(self, object_id: Union[ObjectId, str]) -> Model:
-        """Gets object by `id` from database."""
+    async def get(self, object_id: Union[ObjectId, str]) -> Optional[Model]:
+        """Returns object from database by `id`."""
         obj = await self.collection.find_one({'_id': ObjectId(object_id)})
         return self._serialize(obj)
 
@@ -41,6 +41,6 @@ class CRUDBase:
         """Deletes an existing object from database."""
         await self.collection.delete_one({'_id': ObjectId(object_id)})
 
-    def _serialize(self, obj: dict) -> Model:
+    def _serialize(self, obj: dict) -> Optional[Model]:
         """Serializes object with `self.model` or returns `None`."""
-        return self.model(**obj) if obj else None
+        return self.model(**obj) or None
