@@ -1,13 +1,8 @@
 """User schemas."""
 
-# pylint: disable=E1136  # pylint/issues/3882
+from pydantic import BaseModel, EmailStr
 
-from typing import Optional
-
-from pydantic import BaseModel
-from pydantic import EmailStr
-
-from ..base import MongoId, MongoModel
+from ..base import MongoModel
 
 
 class User(BaseModel):
@@ -21,10 +16,10 @@ class UserIn(User):
     password: str
 
 
+class UserOut(MongoModel, User):
     """Output User schema."""
-    id: Optional[MongoId] = None
 
 
+class UserDB(MongoModel, User):
     """Database User schema."""
-    email: EmailStr
     password_hash: str
