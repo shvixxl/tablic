@@ -13,6 +13,7 @@ from ..base import MongoId, MongoModel
 class User(BaseModel):
     """Base User schema."""
     email: EmailStr
+    username: str
 
 
 class UserIn(User):

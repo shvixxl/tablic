@@ -20,7 +20,10 @@ async def create_user(
     users: CRUDUser
 ) -> UserDB:
     """Service for creating new User."""
-    existing_user = await users.get_by_email(user.email)
+    existing_user = await users.get_by_email_or_username(
+        user.email,
+        user.username,
+    )
 
     if existing_user:
         raise UserAlreadyExists()
@@ -36,7 +39,10 @@ async def authenticate_user(
     users: CRUDUser
 ) -> Optional[UserDB]:
     """Service for authenticating User."""
-    user = await users.get_by_email(credentials.username)
+    user = await users.get_by_email_or_username(
+        credentials.username,
+        credentials.username,
+    )
 
     if not user:
         # Run the hasher to mitigate timing attack
