@@ -41,7 +41,7 @@ class Settings(BaseSettings):
         """Assebles database URI."""
         if isinstance(value, str):
             return value
-        return 'mongodb://{username}:{password}@{host}:{port}/{name}'.format(
+        return 'mongodb://{username}:{password}@{host}:{port}/{name}?authSource=admin'.format(
             username=values.get('DB_USERNAME'),
             password=values.get('DB_PASSWORD'),
             host=values.get('DB_HOST'),
