@@ -5,7 +5,7 @@ from typing import TypeVar, Union, Optional
 from motor.motor_asyncio import AsyncIOMotorCollection
 from bson.objectid import ObjectId
 
-from ..schemas.base import MongoModel
+from app.schemas.base import MongoModel
 
 Model = TypeVar('Model', bound=MongoModel)
 

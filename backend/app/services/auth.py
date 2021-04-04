@@ -4,11 +4,11 @@ from typing import Optional
 
 from fastapi.security import OAuth2PasswordRequestForm
 
-from ..config import settings
-from ..crud import CRUDUser
-from ..exceptions import UserAlreadyExists
-from ..schemas.auth import UserIn, UserDB
-from ..helpers.auth import (
+from app.config import settings
+from app.crud import CRUDUser
+from app.exceptions import UserAlreadyExists
+from app.schemas.auth import UserIn, UserDB
+from app.helpers.auth import (
     generate_password_hash,
     check_password_hash,
     generate_token,

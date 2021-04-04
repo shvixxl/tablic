@@ -3,10 +3,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .config import settings
-from .logging import init_logger
-from .api.v1 import router
-from .db.mongodb import db
+from app.api.v1 import router
+from app.config import settings
+from app.logging import init_logger
+from app.db.mongodb import db
 
 logger = init_logger()
 

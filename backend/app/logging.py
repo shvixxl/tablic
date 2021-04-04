@@ -5,7 +5,7 @@ import logging
 
 from loguru import logger
 
-from .config import settings
+from app.config import settings
 
 
 class InterceptHandler(logging.Handler):

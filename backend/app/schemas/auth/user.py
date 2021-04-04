@@ -2,7 +2,7 @@
 
 from pydantic import BaseModel, EmailStr
 
-from ..base import MongoModel
+from app.schemas.base import MongoModel
 
 
 class User(BaseModel):

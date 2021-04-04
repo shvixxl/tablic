@@ -4,7 +4,7 @@ from typing import Optional
 
 from pydantic import EmailStr
 
-from .base import CRUDBase, Model
+from app.crud.base import CRUDBase, Model
 
 
 class CRUDUser(CRUDBase):
