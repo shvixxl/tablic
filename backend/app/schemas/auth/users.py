@@ -1,8 +1,10 @@
 """User schemas."""
 
+from typing import Optional, List
+
 from pydantic import BaseModel, EmailStr
 
-from app.schemas.base import MongoModel
+from app.schemas.base import MongoModel, MongoId
 
 
 class User(BaseModel):
@@ -18,8 +20,9 @@ class UserIn(User):
 
 class UserOut(MongoModel, User):
     """Output User schema."""
+    tables: Optional[List[MongoId]] = []
 
 
-class UserDB(MongoModel, User):
+class UserDB(UserOut):
     """Database User schema."""
     password_hash: str

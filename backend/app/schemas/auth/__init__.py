@@ -1,4 +1,4 @@
 """Auth schemas."""
 
-from .user import UserIn, UserOut, UserDB
+from .users import User, UserIn, UserOut, UserDB
 from .token import Token

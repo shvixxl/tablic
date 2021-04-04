@@ -10,8 +10,10 @@ from motor.motor_asyncio import (
 
 class MongoDB:
     """Class for storing MongoDB connection"""
-    client: AsyncIOMotorClient = None
-    database: AsyncIOMotorDatabase = None
+
+    def __init__(self):
+        self.client: AsyncIOMotorClient = None
+        self.database: AsyncIOMotorDatabase = None
 
     async def connect_to_database(self, uri: str):
         """Establish MongoDB connection."""

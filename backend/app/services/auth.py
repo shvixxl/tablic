@@ -5,7 +5,7 @@ from typing import Optional
 from fastapi.security import OAuth2PasswordRequestForm
 
 from app.config import settings
-from app.crud import CRUDUser
+from app.crud import users
 from app.exceptions import UserAlreadyExists
 from app.schemas.auth import UserIn, UserDB
 from app.helpers.auth import (
@@ -17,7 +17,6 @@ from app.helpers.auth import (
 
 async def create_user(
     user: UserIn,
-    users: CRUDUser
 ) -> UserDB:
     """Service for creating new User."""
     existing_user = await users.get_by_email_or_username(
@@ -36,7 +35,6 @@ async def create_user(
 
 async def authenticate_user(
     credentials: OAuth2PasswordRequestForm,
-    users: CRUDUser
 ) -> Optional[UserDB]:
     """Service for authenticating User."""
     user = await users.get_by_email_or_username(

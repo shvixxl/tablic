@@ -3,16 +3,13 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
-from ....crud import CRUDUser
-from ....exceptions import UserAlreadyExists
-from ....schemas.auth import UserIn, UserOut, Token
-from ....services.auth import (
+from app.exceptions import UserAlreadyExists
+from app.schemas.auth import UserIn, UserOut, Token
+from app.services.auth import (
     create_user,
     authenticate_user,
     generate_access_token,
 )
-
-from ...deps import get_users
 
 router = APIRouter(
     tags=['auth'],
@@ -26,11 +23,10 @@ router = APIRouter(
 )
 async def register(
     user: UserIn,
-    users: CRUDUser = Depends(get_users)
 ) -> UserOut:
     """User registration."""
     try:
-        created_user = await create_user(user, users)
+        created_user = await create_user(user)
     except UserAlreadyExists as error:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
@@ -47,10 +43,9 @@ async def register(
 )
 async def login(
     credentials: OAuth2PasswordRequestForm = Depends(),
-    users: CRUDUser = Depends(get_users)
 ) -> Token:
     """User authentication."""
-    user = await authenticate_user(credentials, users)
+    user = await authenticate_user(credentials)
 
     if not user:
         raise HTTPException(

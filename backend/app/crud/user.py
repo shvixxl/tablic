@@ -1,24 +1,26 @@
-"""Auth database module."""
+"""User CRUD."""
 
 from typing import Optional
 
 from pydantic import EmailStr
 
-from app.crud.base import CRUDBase, Model
+from app.schemas.auth import UserDB
+
+from .base import CRUDBase
 
 
 class CRUDUser(CRUDBase):
-    """Database adapter for auth module."""
+    """CRUD for collection of users."""
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    async def init(self, *args, **kwargs):
+        await super().init(*args, **kwargs)
         self.collection.create_index('email', unique=True)
         self.collection.create_index('username', unique=True)
 
     async def get_by_email(
         self,
         email: EmailStr
-    ) -> Optional[Model]:
+    ) -> Optional[UserDB]:
         """Returns User from database by `email`."""
         user = await self.collection.find_one({'email': email})
         return self._serialize(user)
@@ -26,7 +28,7 @@ class CRUDUser(CRUDBase):
     async def get_by_username(
         self,
         username: str
-    ) -> Optional[Model]:
+    ) -> Optional[UserDB]:
         """Returns User from database by `username`."""
         user = await self.collection.find_one({'username': username})
         return self._serialize(user)
@@ -35,7 +37,7 @@ class CRUDUser(CRUDBase):
         self,
         email: EmailStr,
         username: str
-    ) -> Optional[Model]:
+    ) -> Optional[UserDB]:
         """Returns User from database by `email` or `username`."""
         user = await self.collection.find_one({
             '$or': [
@@ -44,3 +46,6 @@ class CRUDUser(CRUDBase):
             ]
         })
         return self._serialize(user)
+
+
+users = CRUDUser(UserDB)
