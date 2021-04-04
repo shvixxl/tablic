@@ -3,13 +3,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
+from app import services
 from app.exceptions import UserAlreadyExists
 from app.schemas.auth import UserIn, UserOut, Token
-from app.services.auth import (
-    create_user,
-    authenticate_user,
-    generate_access_token,
-)
 
 router = APIRouter(
     tags=['auth'],
@@ -26,7 +22,7 @@ async def register(
 ) -> UserOut:
     """User registration."""
     try:
-        created_user = await create_user(user)
+        created_user = await services.create_user(user)
     except UserAlreadyExists as error:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
@@ -45,7 +41,7 @@ async def login(
     credentials: OAuth2PasswordRequestForm = Depends(),
 ) -> Token:
     """User authentication."""
-    user = await authenticate_user(credentials)
+    user = await services.authenticate_user(credentials)
 
     if not user:
         raise HTTPException(
@@ -53,4 +49,4 @@ async def login(
             detail="Incorrect email or password.",
         )
 
-    return await generate_access_token(user)
+    return await services.generate_access_token(user)
