@@ -13,7 +13,7 @@ oauth2 = OAuth2PasswordBearer(
 )
 
 
-async def get_current_user(
+async def get_user(
     token: str = Depends(oauth2),
 ) -> UserDB:
     """Validates token and returns user."""
