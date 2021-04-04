@@ -50,6 +50,7 @@ class Settings(BaseSettings):
         )
 
     USER_COLLECTION_NAME: Optional[str] = 'users'
+    TABLE_COLLECTION_NAME: Optional[str] = 'tables'
 
     LOGGING_FILENAME: Optional[str] = 'log.json'
     LOGGING_PATH: Path
