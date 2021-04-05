@@ -3,8 +3,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app import crud
 from app.db import db
-from app.crud import users, tables
 from app.api.v1 import router
 from app.config import settings
 from app.logging import init_logger
@@ -23,8 +23,9 @@ app = FastAPI(
 async def connect_to_database():
     """Event for establishing MongoDB connection."""
     await db.connect_to_database(settings.DB_URI)
-    await users.init(db.database[settings.USER_COLLECTION_NAME])
-    await tables.init(db.database[settings.TABLE_COLLECTION_NAME])
+    await crud.users.init(db.database[settings.USER_COLLECTION_NAME])
+    await crud.tables.init(db.database[settings.TABLE_COLLECTION_NAME])
+    await crud.messages.init(db.database[settings.MESSAGE_COLLECTION_NAME])
 
 
 @app.on_event('shutdown')

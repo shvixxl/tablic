@@ -1,4 +1,4 @@
-"""Table services with bussines logic."""
+"""Table services with business logic."""
 
 from app.crud import users, tables
 from app.schemas import UserDB, TableIn, TableDB, Player

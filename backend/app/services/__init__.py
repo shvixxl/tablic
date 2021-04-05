@@ -8,3 +8,6 @@ from .auth import (
 from .table import (
     create_table,
 )
+from .chat import (
+    create_message,
+)

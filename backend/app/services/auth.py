@@ -1,4 +1,4 @@
-"""Auth services with bussines logic."""
+"""Auth services with business logic."""
 
 from typing import Optional
 
