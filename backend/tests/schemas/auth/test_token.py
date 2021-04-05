@@ -5,7 +5,7 @@ import pytest
 from pydantic import ValidationError
 
 from app.helpers.auth import generate_token
-from app.schemas.auth import Token
+from app.schemas import Token
 
 
 def test_token(object_id, secret, time_delta):

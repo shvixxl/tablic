@@ -7,7 +7,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from app.config import settings
 from app.crud import users
 from app.exceptions import UserAlreadyExists
-from app.schemas.auth import UserIn, UserDB
+from app.schemas import UserIn, UserDB
 from app.helpers.auth import (
     generate_password_hash,
     check_password_hash,

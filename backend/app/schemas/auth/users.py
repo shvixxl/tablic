@@ -4,7 +4,7 @@ from typing import Optional, List
 
 from pydantic import BaseModel, EmailStr
 
-from app.schemas.base import MongoModel, MongoId
+from ..base import MongoModel, MongoId
 
 
 class User(BaseModel):

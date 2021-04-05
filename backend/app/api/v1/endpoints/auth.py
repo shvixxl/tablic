@@ -5,7 +5,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 
 from app import services
 from app.exceptions import UserAlreadyExists
-from app.schemas.auth import UserIn, UserOut, Token
+from app.schemas import UserIn, UserOut, Token
 
 router = APIRouter(
     tags=['auth'],

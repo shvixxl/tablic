@@ -4,9 +4,9 @@ from typing import Optional, List
 
 from pydantic import BaseModel
 
-from app.schemas.base import MongoModel
+from ..base import MongoModel
 
-from app.schemas.table.player import Player
+from .player import PlayerOut
 
 
 class Table(BaseModel):
@@ -20,7 +20,7 @@ class TableIn(Table):
 
 class TableOut(MongoModel, Table):
     """Output Table schema."""
-    players: Optional[List[Player]] = []
+    players: Optional[List[PlayerOut]] = []
 
 
 class TableDB(TableOut):

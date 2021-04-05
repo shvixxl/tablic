@@ -5,7 +5,7 @@ from typing import Union, Optional
 from motor.motor_asyncio import AsyncIOMotorCollection
 from bson.objectid import ObjectId
 
-from app.schemas.base import MongoModel
+from app.schemas import MongoModel
 
 
 class CRUDBase:

@@ -1,6 +1,6 @@
 """Table CRUD."""
 
-from app.schemas.table import TableDB
+from app.schemas import TableDB
 
 from .base import CRUDBase
 

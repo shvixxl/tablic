@@ -4,8 +4,8 @@ import pytest
 
 from pydantic import ValidationError
 
-from app.schemas.auth.user import User
-from app.schemas.auth import UserIn, UserOut, UserDB
+from app.schemas import User
+from app.schemas import UserIn, UserOut, UserDB
 
 
 def test_user(email):

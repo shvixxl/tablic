@@ -2,7 +2,7 @@
 
 from pydantic import BaseModel
 
-from app.schemas.base import MongoId
+from ..base import MongoId
 
 
 class Player(BaseModel):

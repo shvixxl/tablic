@@ -1,8 +1,7 @@
 """Table services with bussines logic."""
 
 from app.crud import users, tables
-from app.schemas.auth import UserDB
-from app.schemas.table import TableIn, TableDB, Player
+from app.schemas import UserDB, TableIn, TableDB, Player
 
 
 async def create_table(

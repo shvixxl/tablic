@@ -4,7 +4,7 @@ import pytest
 
 from bson.objectid import ObjectId
 
-from app.schemas.base import MongoId, MongoModel
+from app.schemas import MongoId, MongoModel
 
 
 def test_mongo_id(object_id):

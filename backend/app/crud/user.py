@@ -4,7 +4,7 @@ from typing import Optional
 
 from pydantic import EmailStr
 
-from app.schemas.auth import UserDB
+from app.schemas import UserDB
 
 from .base import CRUDBase
 
