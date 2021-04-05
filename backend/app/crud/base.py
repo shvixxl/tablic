@@ -1,9 +1,10 @@
 """Base CRUD."""
 
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from motor.motor_asyncio import AsyncIOMotorCollection
 from bson.objectid import ObjectId
+from pydantic import BaseModel
 
 from app.schemas import MongoModel
 
@@ -18,6 +19,11 @@ class CRUDBase:
     async def init(self, collection: AsyncIOMotorCollection):
         """Connects CRUD and Database."""
         self.collection = collection
+
+    async def query(self, query: dict) -> Optional[List[MongoModel]]:
+        """Returns the result of the provided query."""
+        result = await self.collection.find(query)
+        return self._serialize(result)
 
     async def get(self, object_id: Union[ObjectId, str]) -> Optional[MongoModel]:
         """Returns object from database by `id`."""
@@ -40,6 +46,11 @@ class CRUDBase:
         """Deletes an existing object from database."""
         await self.collection.delete_one({'_id': ObjectId(object_id)})
 
-    def _serialize(self, obj: dict) -> Optional[MongoModel]:
-        """Serializes object with `self.model` or returns `None`."""
+    def _serialize(self, obj: Union[dict, List[dict]]) -> Optional[MongoModel]:
+        """
+        Serializes object with `self.model` or returns `None`.
+        Also can serialize list of objects.
+        """
+        if isinstance(obj, list):
+            return [self.model(**o) for o in obj]
         return self.model(**obj) if obj else None
