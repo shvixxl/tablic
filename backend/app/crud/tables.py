@@ -5,8 +5,8 @@ from app.schemas import TableDB
 from .base import CRUDBase
 
 
-class CRUDTable(CRUDBase):
+class CRUDTables(CRUDBase):
     """CRUD for collection of tables."""
 
 
-tables = CRUDTable(TableDB)
+tables = CRUDTables(TableDB)

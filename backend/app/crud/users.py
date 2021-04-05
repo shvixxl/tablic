@@ -9,7 +9,7 @@ from app.schemas import UserDB
 from .base import CRUDBase
 
 
-class CRUDUser(CRUDBase):
+class CRUDUsers(CRUDBase):
     """CRUD for collection of users."""
 
     async def init(self, *args, **kwargs):
@@ -48,4 +48,4 @@ class CRUDUser(CRUDBase):
         return self._serialize(user)
 
 
-users = CRUDUser(UserDB)
+users = CRUDUsers(UserDB)

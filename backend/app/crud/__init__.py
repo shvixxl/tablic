@@ -1,4 +1,4 @@
 """Application CRUDs."""
 
-from .user import users
-from .table import tables
+from .users import users
+from .tables import tables
