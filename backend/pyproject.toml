@@ -7,7 +7,7 @@ license = "MIT License"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-fastapi = "^0.70.0"
+fastapi = {extras = ["all"], version = "^0.70.0"}
 bcrypt = "^3.2.0"
 PyJWT = "^2.3.0"
 motor = "^2.5.1"
