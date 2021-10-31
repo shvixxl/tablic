@@ -4,5 +4,5 @@
 # Include
 !app
 !scripts
-!Pipfile
-!Pipfile.lock
+!poetry.lock
+!pyproject.toml

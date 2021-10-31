@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "tablic"
+version = "0.1.0"
+description = "Web application"
+authors = ["lazy-octopus-kebab <shvix@pm.me>"]
+license = "MIT License"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.70.0"
+bcrypt = "^3.2.0"
+PyJWT = "^2.3.0"
+motor = "^2.5.1"
+loguru = "^0.5.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+pylint = "^2.11.1"
+Faker = "^9.7.1"
+pytest-cov = "^3.0.0"
+pytest-asyncio = "^0.16.0"
+httpx = "^0.20.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
