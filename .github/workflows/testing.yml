@@ -22,18 +22,17 @@ jobs:
           python-version: 3.9
 
       - name: Install Poetry
-        run: |
-          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+        uses: snok/install-poetry@v1
 
       - name: Restore cached Poetry virtualenvs
-        id: cache
+        id: cached-poetry-virtualenvs
         uses: actions/cache@v2
         with:
           path: ~/.cache/pypoetry/virtualenvs
           key: poetry-virtualenvs-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cached-poetry-virtualenvs.outputs.cache-hit != 'true'
         working-directory: ${{ env.working-directory }}
         run: |
           poetry install
