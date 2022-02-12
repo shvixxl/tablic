@@ -28,33 +28,14 @@ class Settings(BaseSettings):
             return timedelta(int(value))
         return value
 
-    DB_HOST: str
-    DB_PORT: int
-    DB_NAME: str
-    DB_USERNAME: str
-    DB_PASSWORD: str
-
-    DB_URI: Optional[AnyUrl] = None
-
-    @validator('DB_URI', pre=True)
-    def assemble_db_uri(cls, value: Optional[str], values: dict) -> str:
-        """Assebles database URI."""
-        if isinstance(value, str):
-            return value
-        return 'mongodb://{username}:{password}@{host}:{port}/{name}?authSource=admin'.format(
-            username=values.get('DB_USERNAME'),
-            password=values.get('DB_PASSWORD'),
-            host=values.get('DB_HOST'),
-            port=values.get('DB_PORT'),
-            name=values.get('DB_NAME'),
-        )
+    DB_URI: AnyUrl = 'mongodb://localhost:27017'
 
     USER_COLLECTION_NAME: Optional[str] = 'users'
     TABLE_COLLECTION_NAME: Optional[str] = 'tables'
     MESSAGE_COLLECTION_NAME: Optional[str] = 'messages'
 
-    LOGGING_FILENAME: Optional[str] = 'log.json'
-    LOGGING_PATH: Path
+    LOGGING_PATH: Optional[Path] = 'logs'
+    LOGGING_FILENAME: Optional[str] = 'logs.json'
 
     @validator('LOGGING_PATH', pre=True)
     def assemble_logging_path(cls, value: Path, values: dict) -> Path:

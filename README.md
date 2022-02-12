@@ -1,11 +1,14 @@
 # Tablic
 
 <p>
-  <a href="https://github.com/ShviXXL/tablic/actions/workflows/testing.yml">
-    <img src="https://github.com/ShviXXL/tablic/actions/workflows/testing.yml/badge.svg" alt="Testing">
+  <a href="https://github.com/ShviXXL/tablic/actions/workflows/backend.yml">
+    <img src="https://github.com/ShviXXL/tablic/actions/workflows/backend.yml/badge.svg" alt="Backend">
   </a>
-  <a href="https://codecov.io/gh/ShviXXL/tablic">
-    <img src="https://codecov.io/gh/ShviXXL/tablic/branch/main/graph/badge.svg"/>
+  <a href="https://github.com/ShviXXL/tablic/actions/workflows/frontend.yml">
+    <img src="https://github.com/ShviXXL/tablic/actions/workflows/fronted.yml/badge.svg" alt="Frontend">
+  </a>
+  <a href="https://github.com/ShviXXL/tablic/actions/workflows/frontend.yml">
+    <img src="https://github.com/ShviXXL/tablic/actions/workflows/codeql.yml/badge.svg" alt="CodeQL">
   </a>
 </p>
 
