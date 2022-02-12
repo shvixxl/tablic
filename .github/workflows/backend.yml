@@ -8,42 +8,12 @@ on:
     branches: [main]
 
 env:
-  python-version: '3.10'
+  python-version: 3.10.2
   working-directory: backend
 
 jobs:
-  lint:
-    name: Run linters
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ${{ env.working-directory }}
-    steps:
-      - name: Checkout this repository
-        uses: actions/checkout@v2
-
-      - name: Set up python
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ env.python-version }}
-
-      - name: Restore pip cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-${{ env.python-version }}-pip
-
-      - name: Install linters
-        run: |
-          python -m pip install pylint
-
-      - name: Run linters
-        run: |
-          pylint app tests
-
-  test:
-    name: Run tests
-    needs: [lint]
+  test-lint:
+    name: Run tests and linters
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -83,14 +53,17 @@ jobs:
         run: |
           poetry install --no-interaction --no-root
 
+      - name: Run linters
+        run: |
+          pylint app tests
+
       - name: Run tests
-        working-directory: ${{ env.working-directory }}
         run: |
           poetry run pytest --cov=app --cov=tests
 
   build:
     name: Build docker image
-    needs: [test, lint]
+    needs: [test-lint]
     runs-on: ubuntu-latest
     defaults:
       run:
