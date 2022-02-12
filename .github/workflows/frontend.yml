@@ -1,0 +1,99 @@
+name: Backend
+
+on:
+  push:
+    branches: [main]
+
+  pull_request:
+    branches: [main]
+
+env:
+  node-version: 17.5
+  working-directory: frontend
+
+jobs:
+  lint:
+    name: Run linters
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.working-directory }}
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v2
+
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.node-version }}
+
+      - name: Retrieve yarn cache path
+        id: retrieve-yarn-cache-path
+        run: |
+          echo "::set-output name=path::$(yarn cache dir)"
+
+      - name: Restore yarn cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.retrieve-yarn-cache-path.outputs.path }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: |
+          yarn install
+
+      - name: Run linters
+        run: |
+          yarn run lint
+
+  test:
+    name: Run tests
+    needs: [lint]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.working-directory }}
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v2
+
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.node-version }}
+
+      - name: Retrieve yarn cache path
+        id: retrieve-yarn-cache-path
+        run: |
+          echo "::set-output name=path::$(yarn cache dir)"
+
+      - name: Restore yarn cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.retrieve-yarn-cache-path.outputs.path }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: |
+          yarn install
+
+      - name: Run tests
+        run: |
+          yarn run test
+
+  build:
+    name: Build docker image
+    needs: [test, lint]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.working-directory }}
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v2
+
+      - name: Build docker image
+        run: |
+          DOCKER_BUILDKIT=1 docker build .
