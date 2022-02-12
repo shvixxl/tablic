@@ -12,7 +12,7 @@ env:
   working-directory: frontend
 
 concurrency:
-  group: ${{ github.head_ref || github.ref }}
+  group: ${{ github.action }}-${{ github.head_ref || github.ref }}
 
 jobs:
   lint:
