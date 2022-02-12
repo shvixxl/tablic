@@ -55,7 +55,7 @@ jobs:
 
       - name: Run linters
         run: |
-          pylint app tests
+          poetry run pylint app tests
 
       - name: Run tests
         run: |
