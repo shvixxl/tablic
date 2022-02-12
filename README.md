@@ -7,6 +7,9 @@
   <a href="https://github.com/ShviXXL/tablic/actions/workflows/frontend.yml">
     <img src="https://github.com/ShviXXL/tablic/actions/workflows/fronted.yml/badge.svg" alt="Frontend">
   </a>
+  <a href="https://github.com/ShviXXL/tablic/actions/workflows/frontend.yml">
+    <img src="https://github.com/ShviXXL/tablic/actions/workflows/codeql.yml/badge.svg" alt="CodeQL">
+  </a>
 </p>
 
  Web Application.
