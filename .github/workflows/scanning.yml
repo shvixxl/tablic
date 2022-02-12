@@ -1,0 +1,36 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [main]
+
+  pull_request:
+    branches: [main]
+
+  schedule:
+    - cron: '0 12 * * 0'
+
+env:
+  python-version: '3.10'
+  working-directory: backend
+
+jobs:
+  analysis:
+    name: Run CodeQL analysis
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v2
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: python, typescript
+
+      - name: Build CodeQL
+        uses: github/codeql-action/autobuild@v1
+
+      - name: Run CodeQL analysis
+        uses: github/codeql-action/analyze@v1
