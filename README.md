@@ -5,7 +5,7 @@
     <img src="https://github.com/ShviXXL/tablic/actions/workflows/backend.yml/badge.svg" alt="Backend">
   </a>
   <a href="https://github.com/ShviXXL/tablic/actions/workflows/frontend.yml">
-    <img src="https://github.com/ShviXXL/tablic/actions/workflows/fronted.yml/badge.svg" alt="Frontend">
+    <img src="https://github.com/ShviXXL/tablic/actions/workflows/frontend.yml/badge.svg" alt="Frontend">
   </a>
   <a href="https://github.com/ShviXXL/tablic/actions/workflows/frontend.yml">
     <img src="https://github.com/ShviXXL/tablic/actions/workflows/codeql.yml/badge.svg" alt="CodeQL">
