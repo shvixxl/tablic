@@ -11,6 +11,9 @@ env:
   node-version: 17.5
   working-directory: frontend
 
+concurrency:
+  group: ${{ github.head_ref || github.ref }}
+
 jobs:
   lint:
     name: Run linters
