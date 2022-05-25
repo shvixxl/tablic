@@ -9,7 +9,7 @@ license = "MIT License"
 python = "^3.9"
 fastapi = {extras = ["all"], version = "^0.70.0"}
 bcrypt = "^3.2.0"
-PyJWT = "^2.3.0"
+PyJWT = "^2.4.0"
 motor = "^2.5.1"
 loguru = "^0.6.0"
 
