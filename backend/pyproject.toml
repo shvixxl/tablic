@@ -19,7 +19,7 @@ pylint = "^2.11.1"
 Faker = "^9.7.1"
 pytest-cov = "^3.0.0"
 pytest-asyncio = "^0.16.0"
-httpx = "^0.20.0"
+httpx = "^0.23.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
